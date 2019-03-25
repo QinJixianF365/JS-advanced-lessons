@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #fm1{
+            height: 30px;
+            width: 145px;
+            margin-top: 5px;
+            margin-left: 5px;
+            font-size: 10px;
+            color: gray;
+        }
+        #fm2{
+            height: 27px;
+            width: 110px;
+            font-size: 10.5px;
+            color: gray;
+        }
+        #fmj1{
+            border-style: solid;
+            border: 6px 10px 6px 10px;
+            width: 300px;
+            height: 180px;
+            float: left;
+            border-color: rgb(228, 222, 222);
+        }
+        #fmj2{
+            margin-left: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            float: left;
+            width: 300px;
+            font-size: 13px;
+            color: black;
+        }
+        #fmj3{
+            background-color: rgb(228, 222, 222);
+            margin-left: 6px;
+            margin-top: 8px;
+            float: left;
+        }
+        #j1{
+            font-size: 13px;
+            margin-left: 5px;
+            margin-top: 1px;
+        }
+        #j2{
+            color: rgb(228, 222, 222);
+            background-color:gray;
+            text-align: center;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-left: 275px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="fmj1">
+        <input type="text" id="fm1" placeholder="请输入想查找的商品"/>
+        <input type="button" id="fm2" value="搜索" onclick="createP()"/>
+        <p id="j1">最近搜索</p>
+        <div id="fmj2">
+        </div>
+        <p id="j2" onclick="clearP()">X</p>
+    </div>
+</body>
+<script>
+    
+    var fm1 = document.getElementById('fm1');
+    var fmj2 = document.getElementById('fmj2');
+    var fmj3 = document.getElementById('fmj3');
+    
+    function createP() {
+        
+        var qjx1 = new Date().getTime();
+        var qjx2 = fm1.value;
+        var tNode = document.createElement('div');
+        
+        tNode.id = 'fmj3';
+        
+        if(fmj2.children[0]) {
+            fmj2.insertBefore(tNode,fmj2.children[0]);
+　　    }
+        else{
+            fmj2.appendChild(tNode);　　
+　　    }
+        tNode.innerHTML = qjx2;
+        localStorage.setItem(qjx2,qjx1);
+    }
+    function clearP() {
+        var fmj2 = document.getElementById('fmj2');
+        
+        localStorage.clear();
+        fmj2.innerHTML = "";
+    }
+</script>
+</html>
