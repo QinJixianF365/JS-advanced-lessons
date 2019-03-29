@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+20190329
+非期望的变量共享问题及解决办法
+<script>
+    function fn() {
+        var arr1 = [];
+        for(var i = 1; i < 10; i++) {
+            (function(j) {
+                arr[j] = function() {
+                    return j;
+                }
+            })(i)
+        }
+        return arr1;
+    }
+    //
+    fn()[0]();
+
+
+
+</script>
+demo09
+<script>
+        (function(w,d) {
+            var spanList = d.getElementsByTagName("span");
+            var show = d.getElementsByClassName("show")[0];
+            for(var i = 0; i < spanList.length; i++) {
+                    (function() {
+                        spanList[i].onclick = function() {
+                            show.innerText = "导航" + i + "内容";
+                        }
+                    })(i)
+                    
+                }
+            }
+        //    d.getElementById()
+        })(window, document)
+    
+        //(function() {
+        //    document.getElementById()
+        //})()
+</script>
+-立即执行函数
+<script>
+    for(var i = 0; i < 3; i++) {
+        (function() {
+            setTimeout(function() {
+                console.log(new Date(), j);
+            }, j*1000);
+        })(i);
+    }
+        
+</script>
+-闭包
+<script>
+    // 闭包：通过返回函数(fn1)内部定义的函数(fn2)来访问fn1内部的局部变量(x)
+    function fn1() {
+        var x = 1;
+        function fn2() {
+            return ++x;
+        }
+        return fn2;
+    }
+
+    //fn1();//执行结果是2
+    //console.log(x);
+    var fn3 = fn1();
+    console.log(fn3());//2
+    console.log(fn3());//3
+</script>
+<script>
+    // 闭包：函数(addNum)内部定义的函数(return匿名函数)
+    // 与其相关作用域中的变量(start)形成的实体
+    // start会一直保存在内存中，不会被释放
+    function addNum(start) {
+        return function(step) {
+            start += step;
+            return start;
+        }
+    }
+    var fn3 = addNum(10);
+    //fn3(1);
+    console.log(fn3(1));
+    console.log(fn3(1));
+    console.log(fn3(1));
+</script>
+<script>
+    // 闭包带来的影响
+    // 1.闭包让我们可以访问到函数内部定义的变量
+    // 2.闭包让关联作用域中的特定变量保持在内存中
+    function foo() {
+        var i = 0;
+        function bar() {
+            console.log(++i);
+        }
+        return bar;
+    }
+
+    var fn1 = foo();
+    var fn2 = foo();
+    fn1();
+    fn1();
+    fn2();
+    fn1();
+</script>
+</html>
