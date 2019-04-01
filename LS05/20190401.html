@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+20190401闭包
+<script>
+    function foo(x) {
+        var tmp = 10;
+        return function(y) {
+            console.log(x + y, ++tmp);
+        }
+    }
+
+    var fee = foo(10);
+    fee(10);
+    fee(10);
+
+    var tmp = 10;
+    function foo() {
+        return function(y) {
+            console.log(y, ++tmp)
+        }
+    }
+    var fee = foo();
+    fee(10);
+    fee(10);
+    
+    
+    //闭包的常见形式(作为对象的方法返回)
+    function counter() {
+        var n = 0;
+        return {
+            count:function () {
+                return ++n;
+            },
+            reset:function () {
+                n = 0; 
+                return n;
+            }
+        }
+    }
+    var c = counter(),d = counter();
+    console.log(c.count());
+    console.log(d.count());
+    console.log(c.reset());
+    console.log(c.count());
+    console.log(d.count());
+    
+
+    var max = 10;
+    var fn = function(x) {
+        if(x > max){
+            console.log(x);
+        }
+    };
+    (function(f) {
+        var max = 100;
+        f(15);
+    })(fn);
+
+    function fn() {
+        var a;
+        return function() {
+            return a || (a = document.body.appendChild(document.createElement('div')));
+        }
+    };
+    var f = fn();
+    f();
+
+    function closureExample(objID, text, timedelay) {
+        setTimeout(function() {
+            //document.getElementById(objID).innerHTML = text;
+            console.log(objID,text);
+        }, timedelay);
+    }
+    closureExample("myDiv","Closure is Create", 1000);
+    
+
+    /*  对象 instanceof 构造函数
+        1. 判断对象能否使用该构造函数实例化得到
+        2. 判断对象的原型链上能够找到该构造函数的原型
+
+        对象._proto_._proto_(长度不确定) == 构造函数.prototype
+    */
+    //var o = new Object();
+    console.log(Object instanceof Function);
+    console.log(Object._proto_ == Function.prototype);
+
+    console.log(Object instanceof Object);
+    console.log(Object._proto_._proto_ == Object.prototype);
+
+    console.log(Math instanceof Function);
+    console.log(Math instanceof Object);
+    console.log(JSON instanceof Function);
+    console.log(JSON instanceof Object);
+
+    
+    
+    function Person(username, age) {
+        this.username = username;
+        this.age = age = age;
+    }
+    var p = new Person("zhangsan", 20);
+
+    console.log(p._proto_ == Person.prototype);
+
+
+    var o = {
+        x: 1,
+        get x() {
+            return this._x;
+        },
+        set x(val) {
+            this._x = val;
+        }
+    }
+    o.x = 10;
+    console.log(o.x, o._x);
+</script>
+</html>
