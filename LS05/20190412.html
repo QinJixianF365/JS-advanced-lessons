@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+20190412 属性特性描述符及属性特性补充部分
+</body>
+<script>
+    //1
+    var obj = {x: 0};
+
+    Object.defineProperty(obj, "y", {
+        value: 1,
+        enumerable: true,
+        writable: false,
+        configurable: true
+    })
+    // 获取特定对象,特定属性的属性描述符
+    Object.getOwnPropertyDescriptor(obj, 'y');
+    
+    //2
+    var obj = {_x:1};
+    Object.defineProperties(obj,{
+        y:{
+            value:2,
+            writable: true,
+            enumerable: true
+        }
+        z:{
+            value:2,
+            writable: true,
+            enumerable: true
+        }
+        x:{
+            get:function(){return this._x;},
+            set:function (val) {
+                this._x = val;
+            }
+        }
+    })
+    
+    //3
+    var o1 = {};
+    Object.defineProperties(o1, x, {
+        value: 1,
+        writable: true
+    });
+
+    // Object.create(o1) 以o1为原型对象，生成一个新对象
+    var o2 = Object.create(o1);
+    console.log(o2._proto_ == o1);
+    o2.x = 2;
+    // delete删除属性时,只能删除自身所具有的属性
+    delete o2.x;
+    console.log(o2.x);
+    
+    // o2._proto_与o1是完全相同的对象的引用
+    // 改其中一个另一个也就变化
+    o2._proto_.x = 3;
+    console.log(o2.x);
+    console.log(o1.x);
+
+    //4
+    /*
+        javaScript是基于对象的继承方式
+    */
+
+    var obj = {
+        num: 1,
+        str:"hi",
+        sayHi: function() {
+            console.log(this.str);
+        }
+    };
+
+    var newObj = Object.create(obj);
+    console.log(newObj._proto_ == obj);
+    console.log(newObj.num);
+    newObj.sayHi();
+
+    //5
+    var obj = {z: 3};
+    /*
+        obj._proto_ == Object.prototype
+        Object.prototype._proto_ == null
+    */
+    console.log(obj._proto_._proto_);
+
+    var obj1 = {x: 1};
+    var obj2 = Object.create(obj1);
+
+    console.log(obj2._proto_);
+</script>
+</html>
