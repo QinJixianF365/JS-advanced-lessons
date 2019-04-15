@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    JS对象的原型链
+</body>
+<script>
+    //1
+    var obj1 = {z: 1};
+    var obj2 = Object.create(obj1);
+
+    console.log(obj1._proto_ == Object.prototype);
+    console.log(obj2._proto_);// obj1
+    console.log(obj2._proto_._proto_);
+    console.log(obj2._proto_._proto_._proto_);
+
+    //2
+    var obj1 = {z: 1, sayhi: function() {
+        console.log(this.z);
+    }};
+    var obj2 = Object.create(obj1);
+
+    //3
+    function Person(username, age) {
+        this.username = usernaem;
+        this.age = age;
+    }
+    Person.prototype.sayHi = function() {
+        console.log(this.username);
+    }
+    var person = new Person("zhangsan", 30);
+    var person = new Person("lisi", 20);
+    console.log(person1._proto_ == person._proto_);
+    console.log(person1._proto_ == Person.prototype);
+    //person1和person2公用sayHi方法，节省内存空间
+    person1.sayHi();
+    person2.sayHi();
+
+    //4
+    function Person(username, age) {
+        this.username = usernaem;
+        this.age = age;
+    }
+    Person.prototype.sayHi = function() {
+        console.log(this.username);
+    }
+    var person = new Person("zhangsan", 30);
+    /*
+        Person.prototype = person._proto_
+        person.prototype.constructor == Person
+        Person.prototype._proto_ == Object.prototype
+        Object.prototype.constructor = Object
+        Object.prototype._proto_ == null
+    */
+    console.log(Person.prototype == person._proto_);
+    console.log(Person.prototype.constructor);
+    console.log(Person.prototype._proto_ == Object.prototype);
+
+    //5
+    // 定义一个车(car)的对象，height, width, weight
+    // 创建一个小轿车(smallcar)的对象，继承车相关的属性，自己具有color seatNum(座位)
+    // create方法，以及构造函数的形式
+    
+    var car = {
+        height: 150,
+        width: 200,
+        weight: 2000
+    };
+    
+    var smallCar = Object.create(car);
+    smallCar.color = "red";
+    smallCar.smallCar = 4;
+    console.log(smallCar.height);
+    console.log(smallCar.width);
+
+    function createSmallCar(color, seatNum) {
+        this.color = color;
+        this.seatNum = seatNum;
+    }
+    createSmallCar.prototype = car;
+
+    var smallcar = new createSmallCar("red", 4);
+
+    //6
+    /*
+        1.防止变量污染
+        2.防止变量的非期望共享
+    */
+    (function() {
+        
+    })();
+
+    for(var i = 0; i < 3; i++) {
+        // 1.给元素绑定事件，回调函数
+        // 2.延迟执行，定时执行
+        (function(j) {
+
+        })(i)
+    };
+
+    // 闭包，JavaScript存在的代码运行机制
+    // 外层函数fn1，内层函fn2
+    function fn1() {
+        var x = 0;
+        function fn2() {
+            return ++x;
+        }
+        return fn2;
+    }
+    var result = fn1();
+    result();
+    result();
+</script>
+</html>
