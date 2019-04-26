@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var superObj = {
+        x:1,
+        y:2
+    };
+    var subObj_First = Object.create(superObj);
+    var subObj_Second = Object.create(superObj);
+    subObj_First._proto_.x = 5;
+    console.log(subObj_Second.x);
+
+    var obj = {
+        x: 1,
+        y: 2
+    }
+    var obj1 = Object.create(obj);
+    var obj2 = Object.create(obj);
+    obj1._proto_.x = 3;
+    //obj1.x = 3;
+    console.log(obj2.x);
+
+
+    function Person(name) {
+        this.name = name;
+    }
+    Person.prototype.age = 20;
+    Person.prototype.showName = function() {
+        console.log(this.name);
+    }
+    function Student(id) {
+        this.id = id;
+    }
+    // person name属性Mike.person._proto_.age
+    // person._proto_.showName
+    Student.prototype = new Person("Mike");
+    Student.prototype = person;
+    var s1 = new Student(2017001);
+    var s2 = new Student(2017002);
+    console.log(s1.id,s2.id);
+    console.log(s1.age,s2.age);
+    // s1自身上面没有age. s1._proto_ == Student.prototype
+    // Student.prototype = Person; person对象上没有age属性
+    // s1._proto_._proto_ == person._proto_
+    // person._proto_ == Person.prototype
+    console.log(s1.age,s2.age);
+
+    
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    };
+    Person.prototype.showName = function() {
+        console.log(this.name);
+    };
+    function Student(name,age,id) {
+        Person.call(this,name,age);
+        this.id = id;
+    }
+    Student.prototype._proto_ = Person.prototype;
+    var s1 = new Student("xxx",22,2017001);
+    var s2 = new Student("www",23,2017002);
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.showName = function() {
+        console.log(this.name);
+    }
+    function Student(name, age, id) {
+        // Person.call切换了person函数内部this的指向
+        //
+        Person.call(this, name, age);
+        this.id = id;
+    }
+    var s1 = new Student("zhangsan", 20, 2017003);
+    s1.showName();
+    console.log(s1);
+
+    
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    };
+    Person.prototype.showName = function() {
+        console.log(this.name);
+    };
+    function Student(name, age, id) {
+        Person.call(this, name, age);
+        this.id = id;
+    }
+    Student.prototype = Object.create(Person.prototype);
+    Student.prototype.constructor = Student;
+    var s1 = new Student("xxx",22,2017001);
+    var s2 = new Student("www",23,2017002);
+</script>
+</html>
