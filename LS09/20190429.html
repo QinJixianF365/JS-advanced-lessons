@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function BaseClass() {
+        
+    }
+    BaseClass.fn1 = function() {
+        console.log("静态方法");
+    }
+    BaseClass.fn1();
+    
+    BaseClass.prototype.fn2 = function() {
+        console.log("原型方法");
+    }
+    var base = new BaseClass();
+    console.log(base._proto_ == BaseClass.prototype);
+    //base.fn1();
+    base.fn2();
+
+    function Person(username, age) {
+        this.username = username;
+        this.age = age;
+    }
+    Person.prototype.constructor == Person;
+    var person = new Person("zhangsan", 20);
+    person.constructor == Person;
+
+    var obj = new Object();
+    obj.f2n();
+
+
+</script>
+
+<body>
+    <input type="text" class="forminput" id="username" />
+</body>
+<script>
+    (function(w, d) {
+        /*构造函数，构造函数会有配置参数*/
+        function inputIdentify(inputID) {
+            this._init(inputID);
+            this._effect();
+        }
+        inputIdentify.prototype._init = function() {
+            var inputObject = d.getElementById(inputID);
+            this.inputObject = inputObject;
+        }
+        inputIdentify.prototype._effect = function() {
+            this.inputObject.onblur = function() {
+                alert("失去焦点");
+            }
+            this.inputObject.onfocus = function() {
+                alert("获得焦点");
+            }
+        }
+        w.inputIdentify = inputIdentify;
+    })(window, document)
+    
+    var input1 = new inputIdentify("username");
+</script>
+
+<script>
+    var arr1 = [a, b, c, d];
+    var arr2 = arr1;
+    arr1[0] = 'e';
+    console.log(arr2);
+
+    var arr1 = [, 2, 4];
+    Array.prototype.min = function() {
+        return "最小值";
+    }
+    console.log(arr1.length);
+
+    for(var i in arr1) {
+        console.log(i, arr1[i]);
+    }
+    
+    var table = new Array(5);
+    for(var i = 0; i < table.length; i++) {
+        table[i] = new Array(5);
+    }
+    for(var row = 0; row < table.length; row++) {
+        for(var col = 0; col < table[row].length; col++){
+            table[row][col] = rpw*col;
+        }
+    }
+    var product = table[2][4];
+
+    Array.prototype.reverse();
+    Array.prototype.sort(compareFunction?);
+
+    Array.prototype.concat(arr1?,arr2?,...);
+    Array.prototype.slice(begin?,end?);
+    Array.prototype.join(separator?);
+
+    var arr1 = [1, 2, 3];
+    arr1.reserve();
+    console.log(arr1);
+
+    /* 
+        1.判断方法是静态方法还是原型方法
+        2.确定这个方法是用来做什么的
+          （1）是否会对原型变量产生影响
+          （2）最终的作用效果是什么样的
+        3.判断方法的参数分别是什么
+          （1）如果参数是回调函数的形式，判断回调函数的参数是什么
+          （2）如果是值类型参数，判断参数所代表的意义
+        4.确定方法调用的返回值
+    */
+    var arr1 = [4, 2, 3, 1];
+    function compareNumbers(a, b) {
+        return a - b;
+    }
+
+    arr1.sort(compareNumbers);
+    console.log(arr1);
+</script>
+</html>
