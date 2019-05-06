@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        /正则表达式的文本部分/正则表达式的标识符
+        [xzy]指的匹配中括号中任意的字符
+        标识符：
+        g是否全局的检索，获取的所有的匹配项还是只获取第一个
+        i表示是否忽略大小写
+    */
+    var reg1 = /[bcf]at/gi  //把g和i去掉再输出试试
+    var reg2 = new RegExp(/[bcf]at/,"gi");
+    var reg3 = new RegExp("[bcf]at","gi");
+    var str = "fat cat bat Fat ojiidd lppqw";
+    var arr = str.match(reg1);
+    console.log(arr);
+
+
+    var reg1 = /adf/gi;
+    var str = "abcdef adf kil";
+    console.log(str.match(reg1));
+
+    
+    var str = "abcdef adf kil ad adfff";
+    var reg1 = /adf/gi;
+    var reg2 = /adf*/gi;
+    console.log(str.match(reg2));
+
+    
+    /*
+        .表示任意字符
+    */
+    var reg3 = /a.c/gi;
+    console.log(str.match(reg3));
+
+
+    /*
+        字符类别：
+        \d表示的是任意的阿拉伯数字 [0-9]
+        \D表示在特定位置上不是一个阿拉伯数字 [^0-9]
+    */
+    var reg4 = /a\bc/gi;
+    var reg4_2 = /a\Dc/gi;
+    var str4 = "a2c a3c abc";
+    str4.match(reg4);
+    str4.match(reg4_2);
+
+    
+    /*
+        [xyz]从中括号的字符集合当中任取一个字符
+        [^xyz]排除中括号字符集合中的字符
+    */
+    var str = "atf btf ktf";
+    var reg = /^[abc]tf/gi;
+    str.match(reg);
+
+    
+    /*
+        ^ 匹配开始的位置
+    */
+    var reg1 = /^a/gi;
+    var str1 = "a1 b2 c3 a4";
+    str1.match(reg1);
+
+    var reg1 = /^a/gi;
+    var str1 = "a1b2c3";
+    str1.match(reg1);
+
+    
+    var reg1 = /^a[0-9]/gi;
+    var str1 = "a1b2c3";
+    str1.match(reg1);
+    
+    /*匹配字符串结束位置*/
+    var reg2 = /[0-9]z$/gi;
+    var str2 = "abcd9z";
+    var str2_2 = "bcfbdfdfd9";
+    console.log(str2.test(reg2));
+    console.log(str2_2.test(reg2));
+    //console.log(str2.match(reg2));
+    //console.log(str2_2.match(reg2));
+
+    
+    /*
+        数量词：
+        ?表示之前的字符出现0次或者1次
+        +表示之前的字符出现1次或者多次
+        x{m, n} m是最小出现次数，n是最多出现次数 
+    */
+    var reg1 = /abc?/gi;
+    var str1 = "abc ab kkk";
+    str1.replace(reg1, "x");
+
+    var reg2 = /abc+/gi;
+    var str2 = "abc abccc abccccc ab";
+    str2.replace(reg2, "x");
+
+    var reg3 = /abc{1,3}/gi;
+    var str3 = "abc abcc abccc abcccc";
+    str3.replace(reg3, "x");
+</script>
+</html>
