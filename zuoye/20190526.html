@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #kuang{
+            margin-left: 100px;
+            box-shadow: 0px 0px 0px 5px rgb(228, 231, 233);
+            position: relative;
+            width: 720px;
+            overflow: hidden;
+            background: black;
+        }
+        #tupian{
+            animation: mymove 2s;
+        }
+        #mdld{
+            color: red;
+            position: relative;
+        }
+        #jieshao{
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        #yz{
+            color: rgb(247, 154, 16);
+            font-style: normal;
+            position: relative;
+        }
+        #sp{
+            text-indent:2em;
+            opacity: 0;
+            color: darkgoldenrod;
+        }
+        #kuang:hover div:nth-child(2){
+            animation:tran1 0.5s linear forwards normal;
+        }
+        #kuang:hover p{
+            animation: sptran 0.5s linear forwards normal;
+        }
+        @keyframes sptran{
+            from{opacity: 0;}
+            to{opacity: 1;}
+        }
+        @keyframes tran1{
+            from{top:0px;}
+            to{top:-300px;}
+        }
+        #biaoqian{
+            color:gray;
+            font-size: 15px;
+            margin-left: 50px;
+        }
+        #tu{
+            filter: brightness(100%);
+            transition: all 0.8s linear;
+            position: relative;
+        }
+        #kuang:hover img{
+        animation: imgtran 0.8s linear forwards;
+        transition: filter;
+        }
+        @keyframes imgtran{
+            from{filter:brightness(100%);top:0px;}
+            to{filter: brightness(30%);top:-7px;}
+        }
+        @keyframes kuangtran{
+            from{box-shadow: 0px 0px 0px 5px #EDEDED;}
+            to{box-shadow: 0px 0px 0px 5px #B3B3B3;}
+        }
+        #kuang:hover{
+            animation: kuangtran 0.3s linear forwards normal;
+        }
+        #riqi{
+            width: 50px;
+            height: 50px;
+            position: relative;
+            border-radius: 50px;
+            background-color: rgb(209, 247, 40);
+            top: -1100px;
+            left: 85%;
+        }
+        #pianming{
+            width: 200px;
+            height: 40px;
+            color: rgb(214, 16, 16);
+            background-color:rgb(197, 248, 10);
+            position: relative;
+            top:-757px;
+            left: 0px;
+            text-align: center;
+            font-weight: 100;
+            font-size: 20px;
+            line-height: 40px;
+            transition: top 0.4s ease-in;
+        }
+        #kuang:hover #pianming{
+            top: -1000px;
+        }
+    </style>
+</head>
+<body>
+    <div id="kuang">
+        <div id="tupian">
+            <img src="picture.jpg" id="tu"/>
+        </div>
+        <div id="jieshao">
+            <h1 id="mdld">火影忍者</h1>
+            <h2 id="yz">NARUTO</h2>
+            <p id="sp">
+                《火影忍者》是日本漫画家岸本齐史的代表作，作品于1999年开始在《周刊少年JUMP》上连载，
+            于2014年11月10日发售的JUMP第50号完结;后日谈性质的外传漫画《火影忍者外传:第七代火影与绯
+            色花月》则于同杂志2015年第22、23合并号开始短期连载，至同年第32号完结。
+                故事成功地将原本隐藏在黑暗中，将用世界上最强大的毅力和最艰辛的努力去做最秘不可宣和隐
+            讳残酷的事情的忍者，描绘成了太阳下最值得骄傲最光明无限的职业。在岸本齐史笔下的忍者世
+            界中，每一位忍者都在开拓着属于自己的忍道。
+            </p>
+        </div>
+        <div id="biaoqian"><span>10分钟前 6条评论</span></div>
+        <div id="riqi"></div>
+        <div id="pianming">NARUTO</div>
+    </div>
+</body>
+</html>
