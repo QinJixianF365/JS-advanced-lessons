@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 不会阻塞主线程的执行，在满足特定条件时
+    // 会反馈到主线程
+    window.onload = function() {
+        console.log("页面加载完成");
+    }
+    console.log("主线程");
+    var i = 0;
+    var intervalId = setInterval(function() {
+        console.log(i++);
+    }, 3000)
+
+    
+    // ajax可以以异步的方式实现前后端数据的交互
+</script>
+
+
+<body>
+    这是一个网页
+</body>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    // 前端通过发起ajax请求的方式，来从服务器端获取数据
+    // 请求方式有get请求和post请求
+    $.get("./server.php", function(res) {
+        //console.log(res);
+        $("body").html(res);
+    })
+</script>
+
+
+<body>
+    <img src="" alt="">
+    <span id="title"></span>
+    <button id="btn">jq ajax</button>
+</body>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    // 在前端页面实现jQuery ajax请求
+    // ajax请求指明请求后的后端程序的地址
+    // 后端程序接收到请求，作出响应
+    // 前端接收后端程序的响应内容，并在前端使用
+    
+    // 前后端文件必须都放在服务器上面 
+
+    // ajax 可以实现页面的局部刷新
+    $("#btn").click(function() {
+        $.ajax({
+            url: "./server.php",
+            type: "get",
+            success: function(data) {
+                $("title").html(data);
+                console.log(data);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    })
+</script>
+
+
+<script>
+    // let声明的变量会拥有块级作用域 {}
+    var username = "zhangsan"
+    if(true) {
+        let username = "lisi";
+        //var username = "lisi";
+        console.log(username);
+    }
+    console.log(username);
+</script>
+
+<script>
+    // 之前var声明变量的方式，只有一个
+    // 全局变量i，所有的延迟执行都在共用一个i
+
+    // let声明的方式，每次循环都会形成自己的一个独立作用域。
+    for(let i = 0; i < 3; i++) {
+        setTimeout(function() {
+            console.log(new Date(), i);
+        }, i*1000)
+    }
+    // let，const声明的变量在声明之前是不可用的
+
+    // const声明的变量不可修改  const定义变量时
+    // 必须要进行初始化
+    const PI = 3.1415926;
+    PI = 3.1212132;
+
+    const sex;
+
+    const obj = {
+        x: 1,
+        y: 2
+    }
+
+    function foo2() {
+        let x;
+        let x;
+    }
+    foo2();// 报错 重复定义
+</script>
+</html>
